@@ -1,0 +1,259 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    direction: rtl;
+    --sat: env(safe-area-inset-top);
+    --sar: env(safe-area-inset-right);
+    --sab: env(safe-area-inset-bottom);
+    --sal: env(safe-area-inset-left);
+  }
+
+  body {
+    @apply font-sans text-gray-900 antialiased;
+    background: linear-gradient(135deg, #f8f9ff 0%, #f0e7ff 100%);
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+  }
+
+  /* Improve Arabic text rendering */
+  h1, h2, h3, h4, h5, h6 {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Enhanced focus styles */
+  *:focus {
+    @apply outline-none ring-2 ring-purple-500 ring-offset-2 ring-offset-white;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+    height: -webkit-fill-available;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-6 py-3 rounded-lg font-medium transition-all duration-200 transform touch-target;
+  }
+  
+  .btn-primary {
+    @apply bg-purple-600 text-white hover:bg-purple-700 hover:scale-105 active:scale-95 shadow-md;
+  }
+
+  .btn-secondary {
+    @apply bg-white text-purple-600 border-2 border-purple-600 hover:bg-purple-50 hover:scale-105 active:scale-95;
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200;
+  }
+
+  .input {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 touch-target;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+  }
+
+  .modal-content {
+    @apply max-w-lg w-full mx-auto bg-white rounded-xl shadow-xl p-6 relative;
+    @apply max-h-[90vh] overflow-y-auto;
+    @apply sm:max-h-[85vh] md:max-h-[80vh];
+  }
+}
+
+@layer utilities {
+  /* Safe area insets */
+  .safe-top {
+    padding-top: var(--sat);
+  }
+  
+  .safe-bottom {
+    padding-bottom: var(--sab);
+  }
+
+  .safe-left {
+    padding-left: var(--sal);
+  }
+
+  .safe-right {
+    padding-right: var(--sar);
+  }
+
+  /* Touch targets */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  /* High DPI images */
+  .image-high-dpi {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+
+  /* Print utilities */
+  .no-print {
+    @apply print:hidden;
+  }
+
+  /* Responsive layout utilities */
+  .responsive-container {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .responsive-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6;
+  }
+
+  .responsive-flex {
+    @apply flex flex-col sm:flex-row items-center gap-4;
+  }
+}
+
+/* RTL specific adjustments */
+[dir="rtl"] {
+  .ltr-text {
+    direction: ltr;
+  }
+
+  .phone-input input {
+    text-align: right;
+    padding-right: 52px !important;
+    padding-left: 12px !important;
+  }
+
+  .phone-input .selected-flag {
+    right: 0;
+    left: auto;
+  }
+
+  .phone-input .country-list {
+    right: 0;
+    left: auto;
+  }
+}
+
+[dir="ltr"] {
+  .rtl-text {
+    direction: rtl;
+  }
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-purple-400 rounded-full hover:bg-purple-500 transition-colors;
+}
+
+/* Enhanced animations */
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-in-out;
+}
+
+.animate-scale {
+  animation: scale 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scale {
+  from { transform: scale(0.95); }
+  to { transform: scale(1); }
+}
+
+/* Phone Input Styles with RTL support */
+.phone-input {
+  @apply w-full;
+}
+
+.phone-input input {
+  @apply w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200;
+}
+
+.phone-input-button {
+  @apply bg-transparent border-0 rounded-r-lg rtl:rounded-r-none rtl:rounded-l-lg transition-colors hover:bg-gray-100;
+}
+
+.phone-input-dropdown {
+  @apply bg-white border border-gray-200 rounded-lg shadow-lg mt-1;
+}
+
+.phone-input-dropdown .country {
+  @apply px-4 py-2 hover:bg-purple-50 cursor-pointer transition-colors;
+}
+
+.phone-input-dropdown .country.highlight {
+  @apply bg-purple-100;
+}
+
+.phone-input-dropdown .country-name {
+  @apply text-sm text-gray-700;
+}
+
+.phone-input-dropdown .dial-code {
+  @apply text-sm text-gray-500;
+}
+
+/* Media Queries */
+@media (max-width: 640px) {
+  .container {
+    @apply px-4;
+  }
+
+  .card {
+    @apply rounded-lg shadow-sm;
+  }
+
+  .btn {
+    @apply w-full justify-center;
+  }
+}
+
+/* Landscape mode */
+@media (orientation: landscape) and (max-height: 600px) {
+  .modal-content {
+    @apply max-h-[85vh] overflow-y-auto;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
